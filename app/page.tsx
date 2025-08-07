@@ -24,9 +24,13 @@ export default function Home() {
   ];
 
   return (
-    <div className={`${styles.container} ${instrumentSans.className}`}>
+    <div className={styles.container}>
+      {/* Wandering Smiley Faces */}
+      <div className={styles.wanderingSmiley}></div>
+      <div className={styles.wanderingSmiley2}></div>
+      
       <header className={styles.header}>
-        <h1>Elizabeth's prototypes</h1>
+        <h1>✨ Skip's Prototypes ✨</h1>
       </header>
 
       <main>

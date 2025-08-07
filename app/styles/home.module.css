@@ -1,50 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
 .container {
-  max-width: var(--max-width);
-  margin: 0 auto;
+  min-height: 100vh;
+  background: 
+    linear-gradient(45deg, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #feca57 100%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.1) 10px,
+      rgba(255, 255, 255, 0.1) 20px
+    );
+  background-size: 100% 100%, 20px 20px;
   padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(69, 183, 209, 0.3) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .header {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .header h1 {
+  font-family: 'Press Start 2P', monospace;
   font-size: 2.5rem;
   font-weight: 700;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbowShift 3s ease-in-out infinite;
+  text-shadow: 
+    3px 3px 0px rgba(0, 0, 0, 0.3),
+    6px 6px 0px rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 1rem;
+}
+
+@keyframes rainbowShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .card {
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 4px solid #000;
+  border-radius: 0;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
   display: block;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 
+    8px 8px 0px rgba(0, 0, 0, 0.8),
+    inset 2px 2px 0px rgba(255, 255, 255, 0.8);
+  transform: rotate(-1deg);
+  font-family: 'VT323', monospace;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+  background-size: 400% 400%;
+  animation: rainbowShift 4s ease-in-out infinite;
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.card:nth-child(2n) {
+  transform: rotate(1deg);
+}
+
+.card:nth-child(3n) {
+  transform: rotate(-0.5deg);
 }
 
 .card:hover {
-  background: rgba(0, 0, 0, 0.04);
-  transform: translateY(-2px);
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 
+    12px 12px 0px rgba(0, 0, 0, 0.8),
+    inset 2px 2px 0px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 1);
+}
+
+.card:hover::before {
+  animation: rainbowShift 1s ease-in-out infinite;
 }
 
 .card h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Press Start 2P', monospace;
+  color: #000;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+  line-height: 1.4;
 }
 
 .card p {
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: 1.1rem;
+  color: #333;
   line-height: 1.6;
+  font-family: 'VT323', monospace;
+  margin: 0;
+}
+
+/* Wandering Smiley Face */
+.wanderingSmiley {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background: #feca57;
+  border: 6px solid #000;
+  border-radius: 50%;
+  z-index: 1000;
+  animation: wander 20s linear infinite;
+  box-shadow: 
+    8px 8px 0px rgba(0, 0, 0, 0.8),
+    inset 4px 4px 0px rgba(255, 255, 255, 0.8);
+}
+
+.wanderingSmiley::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  box-shadow: 36px 0 0 #000;
+}
+
+.wanderingSmiley::after {
+  content: '';
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  border: 4px solid #000;
+  border-top: none;
+  border-radius: 0 0 24px 24px;
+}
+
+/* Second Wandering Smiley Face */
+.wanderingSmiley2 {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background: #ff6b6b;
+  border: 6px solid #000;
+  border-radius: 50%;
+  z-index: 1000;
+  animation: wander2 15s ease-in-out infinite;
+  box-shadow: 
+    8px 8px 0px rgba(0, 0, 0, 0.8),
+    inset 4px 4px 0px rgba(255, 255, 255, 0.8);
+}
+
+.wanderingSmiley2::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  box-shadow: 36px 0 0 #000;
+}
+
+.wanderingSmiley2::after {
+  content: '';
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  border: 4px solid #000;
+  border-top: none;
+  border-radius: 0 0 24px 24px;
+}
+
+@keyframes wander {
+  0% {
+    top: 20px;
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  10% {
+    top: 20px;
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(360deg);
+  }
+  20% {
+    top: calc(100vh - 100px);
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(720deg);
+  }
+  30% {
+    top: calc(100vh - 100px);
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(1080deg);
+  }
+  40% {
+    top: 20px;
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(1440deg);
+  }
+  50% {
+    top: 20px;
+    left: calc(50vw - 40px);
+    transform: translateX(0) translateY(0) rotate(1800deg);
+  }
+  60% {
+    top: calc(50vh - 40px);
+    left: calc(50vw - 40px);
+    transform: translateX(0) translateY(0) rotate(2160deg);
+  }
+  70% {
+    top: calc(50vh - 40px);
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(2520deg);
+  }
+  80% {
+    top: calc(100vh - 100px);
+    left: calc(50vw - 40px);
+    transform: translateX(0) translateY(0) rotate(2880deg);
+  }
+  90% {
+    top: calc(50vh - 40px);
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(3240deg);
+  }
+  100% {
+    top: 20px;
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(3600deg);
+  }
+}
+
+@keyframes wander2 {
+  0% {
+    top: calc(100vh - 100px);
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+  }
+  15% {
+    top: 20px;
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(540deg) scale(1.2);
+  }
+  30% {
+    top: 20px;
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(1080deg) scale(0.8);
+  }
+  45% {
+    top: calc(50vh - 40px);
+    left: 20px;
+    transform: translateX(0) translateY(0) rotate(1620deg) scale(1.1);
+  }
+  60% {
+    top: calc(100vh - 100px);
+    left: calc(50vw - 40px);
+    transform: translateX(0) translateY(0) rotate(2160deg) scale(0.9);
+  }
+  75% {
+    top: calc(50vh - 40px);
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(2700deg) scale(1.3);
+  }
+  90% {
+    top: 20px;
+    left: calc(50vw - 40px);
+    transform: translateX(0) translateY(0) rotate(3240deg) scale(0.7);
+  }
+  100% {
+    top: calc(100vh - 100px);
+    left: calc(100vw - 100px);
+    transform: translateX(0) translateY(0) rotate(3600deg) scale(1);
+  }
+}
+
+/* Pixel art decorative elements */
+.container::after {
+  content: '';
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  background: 
+    linear-gradient(45deg, transparent 30%, #ff6b6b 30%, #ff6b6b 40%, transparent 40%),
+    linear-gradient(-45deg, transparent 30%, #4ecdc4 30%, #4ecdc4 40%, transparent 40%),
+    linear-gradient(0deg, transparent 30%, #feca57 30%, #feca57 40%, transparent 40%);
+  background-size: 8px 8px, 8px 8px, 8px 8px;
+  animation: pixelFloat 4s ease-in-out infinite;
+  z-index: 10;
+}
+
+@keyframes pixelFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    transform: none;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .wanderingSmiley {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .wanderingSmiley::before {
+    top: 12px;
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    box-shadow: 28px 0 0 #000;
+  }
+  
+  .wanderingSmiley::after {
+    bottom: 12px;
+    width: 16px;
+    height: 8px;
+    border-width: 2px;
+  }
+  
+  .wanderingSmiley2 {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .wanderingSmiley2::before {
+    top: 12px;
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    box-shadow: 28px 0 0 #000;
+  }
+  
+  .wanderingSmiley2::after {
+    bottom: 12px;
+    width: 16px;
+    height: 8px;
+    border-width: 2px;
+  }
 } 
